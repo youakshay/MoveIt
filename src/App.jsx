@@ -14,26 +14,13 @@ import { AiOutlineUser } from "react-icons/ai";
 import { CiSettings } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsChatDots } from "react-icons/bs";
-
-
-
-
-
+import { Chat } from './Chat'
 
 
 function App() {
-  const [haveAccount, setHaveAccount] = useState(true);
-
-  const switchToLogin = () => {
-    setHaveAccount(true);
-  }
-  const switchToSignup = () => {
-    setHaveAccount(false);
-  }
 
   const [sideOpen, setSideOpen] = useState(true);
   const [loggedIn, setLoggedIn] = useState(true);
-
 
   return (
     <div className='p-2'>
@@ -46,6 +33,7 @@ function App() {
 
         <ul className='py-4 px-1'>
 
+          <Link to={"/"}>
           <li className='flex flex-row text-white'>
             <div className='border p-1 border-white rounded-md h-12 w-full hover:scale-105 duration-150'>
               <BsChatDots className='mt-1 h-8 w-8 absolute'/>
@@ -54,6 +42,7 @@ function App() {
               </p>
             </div>
           </li>
+          </Link>
 
           <li className='flex flex-row text-white mt-2'>
             <div className='border p-1 border-white rounded-md h-12 w-full hover:scale-105 duration-150'>
@@ -64,14 +53,16 @@ function App() {
             </div>
           </li>
 
+          <Link to={"/settings"}>
           <li className='flex flex-row text-white mt-2'>
             <div className='border p-1 border-white rounded-md h-12 w-full hover:scale-105 duration-150'>
               <CiSettings className='mt-1 h-8 w-8 absolute'/>
-              <Link className={`${!sideOpen ? "scale-0" : "scale-100"} ml-10 mt-1`} to="/settings">
+              <p className={`${!sideOpen ? "scale-0" : "scale-100"} ml-10 mt-1`}>
                 Setting
-              </Link>
+              </p>
             </div>
           </li>
+          </Link>
 
           <li className='flex flex-row text-white mt-2'>
             <div className='border p-1 border-white rounded-md h-12 w-full hover:scale-105 duration-150'>
@@ -90,18 +81,12 @@ function App() {
       
       <NavBar />
       <div className='grid'>
-        <div className='grid  border-2 h-max justify-self-center w-96 mt-20'>
-          <div className='grid grid-cols-2 justify-self-center  h-8 w-full'>
-              <div className={` ${!haveAccount? "bg-white text-black": "bg-blue-600 text-white"} grid rounded-r-lg`} onClick={switchToLogin}><span className='justify-self-center font-semibold mt-1'>Login</span></div>
-              <div className={` ${haveAccount? "bg-white text-black": "bg-blue-600 text-white"} grid rounded-l-lg`} onClick={switchToSignup}><span className='justify-self-center font-semibold mt-1'>Signup</span></div>
-          </div>
           <Routes>
-            <Route path='/' element={<Login />}/>
+            <Route path='/' element={<Chat />}/>
             <Route path='/settings' element={<Setting />} />
           </Routes>
         </div>
       </div>
-    </div>
   )
 }
 
